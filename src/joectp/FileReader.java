@@ -23,7 +23,7 @@ public class FileReader {
     final static Charset ENCODING = StandardCharsets.UTF_8;
     Boolean inFixes = false;
     
-    String[][] readLargerTextFileAlternate(String aFileName) throws IOException {
+    public String[][] readLargerTextFileAlternate(String aFileName) throws IOException {
     Path path = Paths.get(aFileName);
     String[][] fixes = new String[10000000][3];
     try (BufferedReader reader = Files.newBufferedReader(path, ENCODING)){

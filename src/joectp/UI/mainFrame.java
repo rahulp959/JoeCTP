@@ -3,13 +3,16 @@
  * and open the template in the editor.
  */
 package joectp.UI;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import joectp.*;
 /**
  *
  * @author Parkar2
  */
 public class mainFrame extends java.awt.Frame {
-
+String[][] fixes;
     /**
      * Creates new form mainFrame
      */
@@ -36,6 +39,9 @@ public class mainFrame extends java.awt.Frame {
         jTextArea2 = new javax.swing.JTextArea();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 exitForm(evt);
             }
@@ -86,7 +92,7 @@ public class mainFrame extends java.awt.Frame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(205, 205, 205)
                         .addComponent(jButton1)))
-                .addGap(219, 236, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,7 +108,7 @@ public class mainFrame extends java.awt.Frame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -122,8 +128,24 @@ public class mainFrame extends java.awt.Frame {
     }//GEN-LAST:event_exitForm
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jTextArea1.setText(JoeCTP.CreateMultipleFormattedStringEU(jTextArea2.getText(), jTextField2.getText()));
+        String[] nonExistantFixes = new String[20000];
+        jTextArea1.setText(JoeCTP.CreateMultipleFormattedStringEU(jTextArea2.getText(), jTextField2.getText(), fixes, nonExistantFixes));
+        jTextArea1.append("\nFixes Not Found in SCT file provided\n");
+        for(String fix : nonExistantFixes)
+        {
+            jTextArea1.append(fix + "\n");
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        FileReader fileReader = new FileReader();
+        try {
+            fixes = fileReader.readLargerTextFileAlternate("C:\\CTP.SCT");
+        } catch (IOException ex) {
+            Logger.getLogger(mainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

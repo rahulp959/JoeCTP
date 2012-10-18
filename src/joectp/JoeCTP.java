@@ -11,7 +11,7 @@ public class JoeCTP {
     /**
      * @param args the command line arguments
      */
-//    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
 //        InputStreamReader converter = new InputStreamReader(System.in);
 //        BufferedReader in = new BufferedReader(converter);
 //        int numberOfSpaces = 26;
@@ -22,8 +22,12 @@ public class JoeCTP {
 //        
 //        System.out.print("Enter route name : ");
 //        String routeName = in.readLine();
-//        CreateFormattedString(route, routeName);        
-//    }
+//        CreateFormattedString(route, routeName); 
+        
+        FileReader fileReader = new FileReader();
+        String[][] fixes = fileReader.readLargerTextFileAlternate("C:\\ZOB.SCT");
+    }
+    
     public static String CreateFormattedString(String route, String routeName) {
         String[] routeArray;
         String formattedString = "";

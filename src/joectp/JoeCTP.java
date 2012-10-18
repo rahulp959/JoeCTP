@@ -1,4 +1,5 @@
 package joectp;
+
 import java.io.*;
 
 /**
@@ -23,25 +24,43 @@ public class JoeCTP {
 //        String routeName = in.readLine();
 //        CreateFormattedString(route, routeName);        
 //    }
-
     public static String CreateFormattedString(String route, String routeName) {
         String[] routeArray;
         String formattedString = "";
-        
+
         routeArray = route.split(" ");
-        
-        for(int i = 0; i < routeArray.length - 1; i++)
-        {
-           if(i == 0)
-           {
-               formattedString = String.format("%-26s%-14s%-14s%-14s%s%n", routeName, routeArray[i], routeArray[i], routeArray[i + 1], routeArray[i + 1]);
-           }
-           else
-           {
-               formattedString += String.format("%-26s%-14s%-14s%-14s%s%n","",routeArray[i], routeArray[i], routeArray[i + 1], routeArray[i + 1]);
-           }
+
+        for (int i = 0; i < routeArray.length - 1; i++) {
+            if (i == 0) {
+                formattedString = String.format("%-26s%-14s%-14s%-14s%s%n", routeName, routeArray[i], routeArray[i], routeArray[i + 1], routeArray[i + 1]);
+            } else {
+                formattedString += String.format("%-26s%-14s%-14s%-14s%s%n", "", routeArray[i], routeArray[i], routeArray[i + 1], routeArray[i + 1]);
+            }
         }
-        
+
+        return formattedString;
+    }
+
+    public static String CreateMultipleFormattedStringEU(String route, String routeName) {
+        String[] routeArray;
+        String[] routes;
+        String formattedString = "";
+
+        routes = route.split("\n");
+
+        for (String routeString : routes) {
+            routeArray = routeString.split(" ");
+
+            for (int i = 0; i < routeArray.length - 1; i++) {
+                if (i == 0) {
+                    formattedString += String.format("%-26s%-14s%-14s%-14s%s%n", (routeName + routeArray[i]), routeArray[i], routeArray[i], routeArray[i + 1], routeArray[i + 1]);
+                } else {
+                    formattedString += String.format("%-26s%-14s%-14s%-14s%s%n", "", routeArray[i], routeArray[i], routeArray[i + 1], routeArray[i + 1]);
+                }
+            }
+            formattedString += "\n";
+        }
+
         return formattedString;
     }
 }
